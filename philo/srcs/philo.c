@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/*************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
@@ -29,39 +29,41 @@ void	ft_print(int i, char *s, t_phi *phi)
 	}
 }
 
-void	*w82d(void *phi_ptr)
-{
-	t_phi	*phi;
+// void	*w82d(void *phi_ptr)
+// {
+// 	t_phi	*phi;
 
-	phi = phi_ptr;
-	while (truetime(phi->table) <= (unsigned int)phi->table->time_to_die)
-	{
-		usleep(10);
-	}
-	printf("%d %d died\n", truetime(phi->table), phi->id);
-	return ((void *)0);
-}
+// 	phi = phi_ptr;
+// 	while (truetime(phi->table) <= (unsigned int)phi->table->time_to_die)
+// 	{
+// 		usleep(10);
+// 		printf("test\n");
+// 	}
+// 	printf("%d %d died\n", truetime(phi->table), phi->id);
+// 	exit (0);
+// 	return ((void *)0);
+// }
 
-void	ft_one_philo(t_data *d)
-{
-	write(1, "0\n", 2);
-	pthread_mutex_init(&d->forks[0], NULL);
-	write(1, "1\n", 2);
-	pthread_create(&d->tid[0], NULL, &w82d, &d->phi[0]);
-	d->phi[0].lf = &d->forks[0];
-}
+// void	ft_one_philo(char **av)
+// {
+// 	t_phi	phi;
+
+// 	pthread_mutex_init(&phi.lock, NULL);
+// 	pthread_create(&phi.thread, NULL, &w82d, av[2]);
+	
+// }
 
 int	ft_philo(t_data *d, int argc, char **argv)
 {
 	if (!ft_parseur(argc, argv))
 		return (0);
+	// if (atoi(argv[1]) == 1)
+	// {
+	// 	ft_one_philo(argv);
+	// 	//ft_clear(d);
+	// 	return (1);
+	// }	
 	ft_setdata(d, argv);
-	if (d->nb_philo == 1)
-	{
-		ft_one_philo(d);
-		ft_clear(d);
-		return (1);
-	}	
 	ft_mutex(d);
 	ft_init_phi(d);
 	init_thread(d);

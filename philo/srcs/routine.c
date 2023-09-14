@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:57:32 by admin             #+#    #+#             */
-/*   Updated: 2023/09/12 13:57:24 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/14 12:32:28 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ void	*ft_routine(void *phi_ptr)
 	t_phi	*phi;
 
 	phi = phi_ptr;
+	if (phi->table->nb_eat == 1)
+	{
+		printf("%d %d died\n", truetime(phi->table), phi->id);
+		return (NULL);
+	}
 	if (phi->id % 2 != 0 && truetime(phi->table) < (unsigned int)10)
 	{
 		ft_usleep(100, phi);

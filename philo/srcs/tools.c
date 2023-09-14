@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:33:02 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/12 13:55:19 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/14 13:28:22 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void	ft_usleep(unsigned ms, t_phi *phi)
 	start = truetime(phi->table);
 	while (truetime(phi->table) - start <= ms)
 	{
-		usleep(ms / 10);
+		if (phi->t2die <= truetime(phi->table) - start)
+		{
+			ft_print(1, "died", phi);
+		}
+		usleep(100);
 	}
 }

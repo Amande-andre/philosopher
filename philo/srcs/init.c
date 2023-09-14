@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:22:55 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/12 14:10:33 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/14 12:37:29 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,18 @@ int	init_thread(t_data *d)
 			return (1);
 		i++;
 	}
+
 	i = 0;
-	while (i < d->nb_philo)
-	{
-		if (pthread_join(d->tid[i], NULL))
-			return (1);
-		i++;
+	if (d->nb_philo > 1)
+	{	
+		while (i < d->nb_philo)
+		{
+			if (pthread_join(d->tid[i], NULL))
+				return (1);
+			i++;
+		}
 	}
+	//write(1, "1\n", 2);
 	return (0);
 }
 
