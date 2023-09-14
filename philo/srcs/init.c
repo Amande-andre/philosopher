@@ -6,11 +6,34 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:22:55 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/14 12:37:29 by admin            ###   ########.fr       */
+/*   Updated: 2023/09/14 19:21:16 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+void	*w82d(void *phi_ptr)
+{
+	t_phi	*phi;
+
+	phi = phi_ptr;
+	while (truetime(phi->table) <= (unsigned int)phi->table->time_to_die)
+	{
+		usleep(10);
+		//printf("test\n");
+	}
+	printf("%d %d died\n", truetime(phi->table), phi->id);
+	return ((void *)0);
+}
+
+void	ft_one_philo(t_data *d)
+{
+	t_phi	phi;
+
+	pthread_mutex_init(&phi.lock, NULL);
+	pthread_create(&phi.thread, NULL, &w82d, &d);
+	
+}
 
 int	init_thread(t_data *d)
 {
@@ -23,18 +46,14 @@ int	init_thread(t_data *d)
 			return (1);
 		i++;
 	}
-
-	i = 0;
-	if (d->nb_philo > 1)
-	{	
-		while (i < d->nb_philo)
-		{
-			if (pthread_join(d->tid[i], NULL))
-				return (1);
-			i++;
-		}
+	i = 0;	
+	while (i < d->nb_philo && d->nb_philo > 1)
+	{
+		if (pthread_join(d->tid[i], NULL))
+			return (1);
+		i++;
 	}
-	//write(1, "1\n", 2);
+	write(1, "1\n", 2);
 	return (0);
 }
 
