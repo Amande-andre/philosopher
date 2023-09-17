@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:57:32 by admin             #+#    #+#             */
-/*   Updated: 2023/09/17 19:22:54 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/17 19:42:41 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,21 @@ void	*ft_routine(void *phi_ptr)
 		printf("%d %d died\n", phi->t2die, phi->id);
 		return (NULL);
 	}
-	// if (phi->id % 2 != 0 && truetime(phi->table) < (unsigned int)10)
-	// {
-	// 	ft_usleep(100, phi);
-	// }
-	while (phi->nb_meal != 0 && phi->table->dead == 0)
+	while (phi->nb_meal != 0)
 	{
-		phi->nb_meal--;
-		ft_eating(phi);
+		pthread_mutex_lock(&phi->table->lock);
+		if (phi->table->dead == 0)
+		{
+			phi->nb_meal--;
+			pthread_mutex_unlock(&phi->table->lock);
+			ft_eating(phi);
+		}
+		else
+		{
+			pthread_mutex_unlock(&phi->table->lock);
+			return ((void *)0);
+		}	
+		//pthread_mutex_unlock(&phi->table->lock);
 	}
-	pthread_mutex_destroy(phi->lf);
 	return ((void *)0);
 }
