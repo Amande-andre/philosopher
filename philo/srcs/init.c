@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:22:55 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/17 16:27:18 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/17 19:17:56 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	init_thread(t_data *d)
 		usleep(100);
 		i++;
 	}
-	i = 0;	
+	i = 0;
 	while (i < d->nb_philo)
 	{
 		if (pthread_join(d->tid[i], NULL))
@@ -60,11 +60,13 @@ int	init_thread(t_data *d)
 int	ft_init_phi(t_data *d)
 {
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 1;
 	while (i < d->nb_philo)
 	{
-		d->phi[i].id = i + 1;
+		d->phi[i].id = j;
 		d->phi[i].status = 0;
 		d->phi[i].t2die = d->time_to_die;
 		d->phi[i].t2sleep = d->time_to_sleep;
@@ -73,6 +75,7 @@ int	ft_init_phi(t_data *d)
 		pthread_mutex_init(&d->phi[i].lock, NULL);
 		d->phi[i].table = d;
 		i++;
+		j++;
 	}
 	return (0);
 }
