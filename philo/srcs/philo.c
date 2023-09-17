@@ -14,6 +14,7 @@
 
 void	ft_print(int i, char *s, t_phi *phi)
 {
+	pthread_mutex_lock(&phi->lock);
 	if (i == 1)
 	{
 		phi->table->dead++;
@@ -21,7 +22,7 @@ void	ft_print(int i, char *s, t_phi *phi)
 	if (phi->table->dead == 1)
 	{
 		printf("%d %d died\n", truetime(phi->table), phi->id);
-		pthread_mutex_lock(&phi->lock);
+		pthread_mutex_unlock(&phi->lock);
 		return ((void)0);
 	}
 	else if (phi->table->dead == 0)
