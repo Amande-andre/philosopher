@@ -24,7 +24,7 @@ SRCS =	$(SRCS_DIR)/main.c \
 OBJS_DIR = objs
 OBJS = $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
 
-CC = gcc -fsanitize=address
+CC = gcc #-fsanitize=thread
 CFLAGS = -Wall -Wextra -Werror -g
 
 .PHONY: all clean fclean re
