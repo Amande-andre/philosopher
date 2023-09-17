@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:57:32 by admin             #+#    #+#             */
-/*   Updated: 2023/09/17 18:10:02 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/17 18:37:12 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	ft_eating(t_phi *phi)
 	ft_take_fork(phi);
 	ft_print(check(phi), "is eating", phi);
 	ft_usleep(phi->table->time_to_eat, phi);
-	ft_drop_fork(phi);
-	ft_print(check(phi), "is sleeping", phi);
-	ft_usleep(phi->table->time_to_sleep, phi);
 	phi->t2die = truetime(phi->table) + phi->table->time_to_die;
+	ft_print(check(phi), "is sleeping", phi);
+	ft_drop_fork(phi);
+	ft_usleep(phi->table->time_to_sleep, phi);
 }
 
 void	*ft_routine(void *phi_ptr)
