@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:57:32 by admin             #+#    #+#             */
-/*   Updated: 2023/09/17 15:31:32 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/17 17:02:29 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,18 @@ void	ft_drop_fork(t_phi *phi)
 
 void	ft_take_fork(t_phi *phi)
 {
-	pthread_mutex_lock(phi->lf);
+	if (phi->table->dead != 0)
+		return ;
 	pthread_mutex_lock(phi->rf);
+	pthread_mutex_lock(phi->lf);
 	ft_print(check(phi), "has taken a fork", phi);
 	ft_print(check(phi), "has taken a fork", phi);
 }
 
 void	ft_eating(t_phi *phi)
 {
+	if (phi->table->dead != 0)
+		return ;
 	ft_take_fork(phi);
 	ft_print(check(phi), "is eating", phi);
 	ft_usleep(phi->table->time_to_eat, phi);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:22:55 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/16 17:48:54 by admin            ###   ########.fr       */
+/*   Updated: 2023/09/17 16:27:18 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	init_thread(t_data *d)
 	{
 		if (pthread_create(&d->tid[i], NULL, &ft_routine, &d->phi[i]) == -1)
 			return (1);
+		usleep(100);
 		i++;
 	}
 	i = 0;	

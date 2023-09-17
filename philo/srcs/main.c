@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:01:02 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/17 16:00:07 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/17 16:41:45 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 
 void	ft_clear(t_data *d)
 {
-	int	i;
-
-	i = 0;
-	while (i < d->nb_philo)
-	{
-		pthread_mutex_destroy(&d->forks[i]);
-		//free(d->phi[i].lf);
-		i++;
-	}
-	pthread_mutex_destroy(&d->lock);
 	free(d->forks);
 	free(d->tid);
 	free(d->phi);
@@ -41,7 +31,6 @@ int	main(int argc, char **argv)
 	{
 		return (1);
 	}
-	//printf("end\n");
 	ft_clear(d);
 	return (0);
 }
