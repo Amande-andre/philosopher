@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:22:55 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/18 15:31:05 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 16:54:23 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	ft_setdata(t_data *d, char **argv)
 	d->start_time = (d->tv.tv_sec * 1000) + (d->tv.tv_usec / 1000);
 	d->dead = 0;
 	pthread_mutex_init(&d->lock, NULL);
+	pthread_mutex_init(&d->write, NULL);
+
 	return (0);
 }
 

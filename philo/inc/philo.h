@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:57:32 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/18 15:16:58 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 16:54:00 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_data
 	struct timeval	tv;
 	struct timeval	op;
 	pthread_mutex_t	lock;
+	pthread_mutex_t	write;
 	pthread_mutex_t	*forks;
 	t_phi			*phi;
 }	t_data;

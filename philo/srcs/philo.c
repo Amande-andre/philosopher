@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:04:14 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/18 15:15:15 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 17:18:30 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_print(int i, char *s, t_phi *phi)
 	if (phi->table->dead == 1)
 	{
 		phi->table->dead++;
-		printf("%d %d died\n", phi->t2die, phi->id);
+		printf("%d %d died\n", truetime(phi->table), phi->id);
 		pthread_mutex_unlock(&phi->table->lock);
 		return ((void)0);
 	}
