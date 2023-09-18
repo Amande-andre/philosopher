@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:01:02 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/17 19:31:17 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 14:54:19 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!ft_philo(d, argc, argv))
 	{
+		free(d);
 		return (1);
 	}
 	ft_clear(d);
