@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:57:32 by admin             #+#    #+#             */
-/*   Updated: 2023/09/18 13:16:48 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 14:13:06 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,22 @@ int	ft_take_fork(t_phi *phi)
 	return (0);
 }
 
+void	ft_left_before_die(t_phi *phi)
+{
+	if (phi->t2eat + truetime(phi->table) >= (unsigned int)phi->table->time_to_die)
+	{
+		while (truetime(phi->table) < phi->t2eat)
+		{
+			usleep(10);
+		}
+		return ;
+	}
+	while (truetime(phi->table) < phi->t2die)
+		usleep(10);
+	printf("thimnk\n");
+	ft_print(1, "died", phi);
+}
+
 void	ft_eating(t_phi *phi)
 {
 	pthread_mutex_lock(&phi->table->lock);
@@ -65,6 +81,8 @@ void	ft_eating(t_phi *phi)
 	ft_drop_fork(phi);
 	ft_print(check(phi), "is sleeping", phi);
 	ft_usleep(phi->table->time_to_sleep, phi);
+	ft_print(check(phi), "is thinking", phi);
+	ft_left_before_die(phi);
 }
 
 void	*ft_routine(void *phi_ptr)
@@ -72,7 +90,6 @@ void	*ft_routine(void *phi_ptr)
 	t_phi	*phi;
 
 	phi = phi_ptr;
-	//phi->t2die = phi->table->time_to_die;
 	if (phi->table->nb_philo == 1)
 	{
 		printf("%d %d has taken a fork\n", 0, phi->id);
@@ -81,7 +98,7 @@ void	*ft_routine(void *phi_ptr)
 		return (NULL);
 	}
 	if (phi->id % 2 == 0)
-		usleep(phi->table->nb_philo * 1000);
+		usleep(phi->table->nb_philo * 100);
 	while (phi->nb_meal != 0)
 	{
 		pthread_mutex_lock(&phi->table->lock);
@@ -95,7 +112,7 @@ void	*ft_routine(void *phi_ptr)
 		{
 			pthread_mutex_unlock(&phi->table->lock);
 			return ((void *)0);
-		}	
+		}
 	}
 	return ((void *)0);
 }
