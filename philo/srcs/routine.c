@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:57:32 by admin             #+#    #+#             */
-/*   Updated: 2023/09/17 19:42:41 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 13:16:48 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,8 @@ int	check(t_phi *phi)
 
 void	ft_drop_fork(t_phi *phi)
 {
-	// pthread_mutex_lock(&phi->table->lock);
-	// if (phi->table->dead != 0)
-	// {
-	// 	pthread_mutex_unlock(&phi->table->lock);
-	// 	return ;
-	// }
 	pthread_mutex_unlock(phi->lf);
 	pthread_mutex_unlock(phi->rf);
-	//pthread_mutex_unlock(&phi->table->lock);
 }
 
 int	ft_take_fork(t_phi *phi)
@@ -74,23 +67,12 @@ void	ft_eating(t_phi *phi)
 	ft_usleep(phi->table->time_to_sleep, phi);
 }
 
-// void	ft_eating(t_phi *phi)
-// {
-// 	if (phi->table->dead != 0)
-// 		return ;
-// 	ft_take_fork(phi);
-// 	ft_print(check(phi), "is eating", phi);
-// 	ft_usleep(phi->table->time_to_eat, phi);
-// 	ft_drop_fork(phi);
-// 	ft_print(check(phi), "is sleeping", phi);
-// 	ft_usleep(phi->table->time_to_sleep, phi);
-// 	phi->t2die = truetime(phi->table) + phi->table->time_to_die;
-// }
 void	*ft_routine(void *phi_ptr)
 {
 	t_phi	*phi;
 
 	phi = phi_ptr;
+	//phi->t2die = phi->table->time_to_die;
 	if (phi->table->nb_philo == 1)
 	{
 		printf("%d %d has taken a fork\n", 0, phi->id);
@@ -98,6 +80,8 @@ void	*ft_routine(void *phi_ptr)
 		printf("%d %d died\n", phi->t2die, phi->id);
 		return (NULL);
 	}
+	if (phi->id % 2 == 0)
+		usleep(phi->table->nb_philo * 1000);
 	while (phi->nb_meal != 0)
 	{
 		pthread_mutex_lock(&phi->table->lock);
@@ -112,7 +96,6 @@ void	*ft_routine(void *phi_ptr)
 			pthread_mutex_unlock(&phi->table->lock);
 			return ((void *)0);
 		}	
-		//pthread_mutex_unlock(&phi->table->lock);
 	}
 	return ((void *)0);
 }

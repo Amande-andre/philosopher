@@ -6,34 +6,11 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:22:55 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/17 19:17:56 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 11:42:36 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-
-// void	*w82d(void *phi_ptr)
-// {
-// 	t_phi	*phi;
-
-// 	phi = phi_ptr;
-// 	while (truetime(phi->table) <= (unsigned int)phi->table->time_to_die)
-// 	{
-// 		usleep(10);
-// 		//printf("test\n");
-// 	}
-// 	printf("%d %d died\n", truetime(phi->table), phi->id);
-// 	return ((void *)0);
-// }
-
-// void	ft_one_philo(t_data *d)
-// {
-// 	t_phi	phi;
-
-// 	pthread_mutex_init(&phi.lock, NULL);
-// 	pthread_create(&phi.thread, NULL, &w82d, &d);
-	
-// }
 
 int	init_thread(t_data *d)
 {
@@ -44,7 +21,7 @@ int	init_thread(t_data *d)
 	{
 		if (pthread_create(&d->tid[i], NULL, &ft_routine, &d->phi[i]) == -1)
 			return (1);
-		usleep(100);
+		//usleep(1);
 		i++;
 	}
 	i = 0;

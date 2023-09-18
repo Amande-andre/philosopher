@@ -37,12 +37,6 @@ int	ft_philo(t_data *d, int argc, char **argv)
 	if (!ft_parseur(argc, argv))
 		return (0);
 	ft_setdata(d, argv);
-	// if (atoi(argv[1]) == 1)
-	// {
-	// 	ft_one_philo(argv);
-	// 	//ft_clear(d);
-	// 	return (1);
-	// }	
 	ft_mutex(d);
 	ft_init_phi(d);
 	init_thread(d);

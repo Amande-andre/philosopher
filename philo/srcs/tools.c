@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:33:02 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/17 19:17:56 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 13:15:48 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ void	ft_usleep(unsigned ms, t_phi *phi)
 		{
 			ft_print(1, "died", phi);
 		}
-		usleep(100);
+		usleep(10);
 	}
 }
