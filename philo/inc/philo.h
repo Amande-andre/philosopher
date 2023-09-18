@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:57:32 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/17 15:46:03 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 15:16:58 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,21 @@ typedef struct s_data
 	t_phi			*phi;
 }	t_data;
 
-
-int			ft_parseur(int argc, char **argv);
-int			ft_isdigit(char c);
-int			ft_checkarg(int argc, char **argv);
-int			ft_philo(t_data *d, int argc, char **argv);
-int			ft_setdata(t_data *d, char **argv);
-long int	ft_atoi(const char *nptr);
-unsigned	truetime(t_data *d);
-void		*ft_routine(void *phi_ptr);
-int			ft_init_phi(t_data *d);
-int			ft_mutex(t_data *d);
-int			init_thread(t_data *d);
-void		ft_usleep(unsigned ms, t_phi *phi);
-void		ft_clear(t_data *d);
-void		*god(void *phi_ptr);
-void		ft_print(int i, char *s, t_phi *phi);
-int			check(t_phi *phi);
+int				ft_parseur(int argc, char **argv);
+int				ft_isdigit(char c);
+int				ft_checkarg(int argc, char **argv);
+int				ft_philo(t_data *d, int argc, char **argv);
+int				ft_setdata(t_data *d, char **argv);
+long int		ft_atoi(const char *nptr);
+unsigned int	truetime(t_data *d);
+void			*ft_routine(void *phi_ptr);
+int				ft_init_phi(t_data *d);
+int				ft_mutex(t_data *d);
+int				init_thread(t_data *d);
+void			ft_usleep(unsigned ms, t_phi *phi);
+void			ft_clear(t_data *d);
+void			*god(void *phi_ptr);
+void			ft_print(int i, char *s, t_phi *phi);
+int				check(t_phi *phi);
 
 #endif

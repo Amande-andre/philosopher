@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:57:32 by admin             #+#    #+#             */
-/*   Updated: 2023/09/18 14:37:20 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 15:36:29 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void	ft_eating(t_phi *phi)
 	ft_print(check(phi), "is thinking", phi);
 	if (phi->t2eat > phi->t2sleep)
 		ft_usleep(phi->t2eat - phi->t2sleep, phi);
-	//ft_left_before_die(phi);
 }
+//ft_left_before_die(phi);
 
 void	*ft_routine(void *phi_ptr)
 {
@@ -102,7 +102,7 @@ void	*ft_routine(void *phi_ptr)
 		return (NULL);
 	}
 	if (phi->id % 2 == 0)
-		usleep(phi->table->nb_philo * 100);
+		usleep(100);
 	while (phi->nb_meal != 0)
 	{
 		pthread_mutex_lock(&phi->table->lock);
