@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:57:32 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/18 16:54:00 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 19:05:57 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_phi
 	pthread_mutex_t	*lf;
 	pthread_mutex_t	*rf;
 	pthread_mutex_t	lock;
-	struct s_data	*table;
+	struct s_data	*d;
 }	t_phi;
 
 typedef struct s_data
@@ -47,7 +47,7 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				nb_eat;
 	int				dead;
-	int				end;
+	unsigned int	end_time;
 	unsigned int	start_time;
 	struct timeval	tv;
 	struct timeval	op;

@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:22:55 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/18 16:54:23 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 19:05:57 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_init_phi(t_data *d)
 		d->phi[i].nb_meal = d->nb_eat;
 		d->phi[i].t2eat = d->time_to_eat;
 		pthread_mutex_init(&d->phi[i].lock, NULL);
-		d->phi[i].table = d;
+		d->phi[i].d = d;
 		i++;
 		j++;
 	}
