@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:57:32 by admin             #+#    #+#             */
-/*   Updated: 2023/09/18 14:13:06 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 14:37:20 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,23 @@ int	ft_take_fork(t_phi *phi)
 	return (0);
 }
 
-void	ft_left_before_die(t_phi *phi)
-{
-	if (phi->t2eat + truetime(phi->table) >= (unsigned int)phi->table->time_to_die)
-	{
-		while (truetime(phi->table) < phi->t2eat)
-		{
-			usleep(10);
-		}
-		return ;
-	}
-	while (truetime(phi->table) < phi->t2die)
-		usleep(10);
-	printf("thimnk\n");
-	ft_print(1, "died", phi);
-}
+// void	ft_left_before_die(t_phi *phi)
+// {
+// 	if (phi->t2die <= truetime(phi->table) + phi->table->time_to_eat)
+// 	{
+// 		// pthread_mutex_lock(&phi->table->lock);
+// 		// phi->table->dead++;
+// 		// pthread_mutex_lock(&phi->table->lock);
+// 		while (truetime(phi->table) < phi->t2die)
+// 		{
+// 			usleep(10);
+// 		}
+// 		ft_print(1, "died", phi);
+// 		return ;
+// 	}
+// 	while (truetime(phi->table) < phi->t2die)
+// 		usleep(10);
+// }
 
 void	ft_eating(t_phi *phi)
 {
@@ -82,7 +84,9 @@ void	ft_eating(t_phi *phi)
 	ft_print(check(phi), "is sleeping", phi);
 	ft_usleep(phi->table->time_to_sleep, phi);
 	ft_print(check(phi), "is thinking", phi);
-	ft_left_before_die(phi);
+	if (phi->t2eat > phi->t2sleep)
+		ft_usleep(phi->t2eat - phi->t2sleep, phi);
+	//ft_left_before_die(phi);
 }
 
 void	*ft_routine(void *phi_ptr)

@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:33:02 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/18 13:54:23 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/18 14:45:49 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,13 @@ void	ft_usleep(unsigned ms, t_phi *phi)
 	start = truetime(phi->table);
 	if (phi->t2die <= truetime(phi->table) + ms)
 	{
-		while (truetime(phi->table) <= phi->t2die)
+		pthread_mutex_lock(&phi->table->lock);
+		phi->table->dead++;
+		pthread_mutex_unlock(&phi->table->lock);
+		while (phi->t2die > truetime(phi->table))
 			usleep(10);
-		ft_print(1, "died", phi);
+		ft_print(1, "died\n", phi);
+
 		return ;
 	}
 	while (truetime(phi->table) - start <= ms)
