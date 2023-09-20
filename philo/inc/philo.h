@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:57:32 by anmande           #+#    #+#             */
-/*   Updated: 2023/09/18 19:05:57 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/20 17:44:36 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_phi
 	unsigned int	t2eat;
 	unsigned int	t2sleep;
 	int				nb_meal;
-	int				eating;
+	unsigned int	last_meal;
 	pthread_t		thread;
 	pthread_mutex_t	*lf;
 	pthread_mutex_t	*rf;

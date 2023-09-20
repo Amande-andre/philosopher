@@ -6,7 +6,7 @@
 /*   By: anmande <anmande@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:57:32 by admin             #+#    #+#             */
-/*   Updated: 2023/09/18 20:16:53 by anmande          ###   ########.fr       */
+/*   Updated: 2023/09/20 17:51:50 by anmande          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,16 @@ void	ft_drop_fork(t_phi *phi)
 int	ft_take_fork(t_phi *phi)
 {
 	if (phi->id % 2 == 0)
+	{
 		pthread_mutex_lock(phi->rf);
+		ft_print(check(phi), "has taken a fork", phi);
+	}	
 	else
+	{
+
 		pthread_mutex_lock(phi->lf);
-	ft_print(check(phi), "has taken a fork", phi);
+		ft_print(check(phi), "has taken a fork", phi);
+	}
 	if (phi->id % 2 == 0)
 	{
 		if (pthread_mutex_lock(phi->lf) != 0)
@@ -47,9 +53,11 @@ int	ft_take_fork(t_phi *phi)
 	return (0);
 }
 
-void	ft_time_to_die(t_phi *phi)
+void	ft_time_to_die(t_phi *phi, unsigned int ms)
 {
 	pthread_mutex_lock(&phi->d->lock);
+	printf("%d time to die : %d phi %d\n", truetime(phi->d), phi->t2die, phi->id);
+	printf("codintion = %d\n", phi->last_meal + ms);
 	if (truetime(phi->d) + phi->t2eat >= phi->t2die)
 	{
 		phi->d->dead++;
@@ -62,25 +70,19 @@ void	ft_time_to_die(t_phi *phi)
 
 void	ft_eating(t_phi *phi)
 {
-	//pthread_mutex_lock(&phi->d->lock);
-	// if (phi->d->dead != 0)
-	// {
-	// 	pthread_mutex_unlock(&phi->d->lock);
-	// 	return ;
-	// }
-	//pthread_mutex_unlock(&phi->d->lock);
-	ft_take_fork(phi);
-	phi->t2die = truetime(phi->d) + phi->d->time_to_die;
+	ft_time_to_die(phi, 200);
+	if (ft_take_fork(phi))
+		return ;
+	phi->t2die = phi->last_meal + phi->d->time_to_die;
+	phi->last_meal = truetime(phi->d);
 	ft_print(check(phi), "is eating", phi);
-	ft_usleep(phi->d->time_to_eat, phi);
+	ft_usleep(phi->t2eat, phi);
 	ft_drop_fork(phi);
+	usleep(100);
 	ft_print(check(phi), "is sleeping", phi);
-	ft_usleep(phi->d->time_to_sleep, phi);
+	ft_usleep(phi->t2sleep, phi);
 	ft_print(check(phi), "is thinking", phi);
-	ft_time_to_die(phi);						//place au mauvais endroit, il
-}												//a deja dormi. A la limite le mettre 				
-//ft_left_before_die(phi);						//avant le ft_usleep de sleeping
-
+}
 void	*ft_routine(void *phi_ptr)
 {
 	t_phi	*phi;
